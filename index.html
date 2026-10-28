@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JProperty - Portal carian rumah untuk dijual dan disewa di seluruh Johor.">
+  <title>JProperty | Cari Rumah Impian Anda</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #172b3a;
+      background: #f5f7fa;
+    }
+    header {
+      background: #073b35;
+      color: white;
+      padding: 20px;
+    }
+    .nav, .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo { font-size: 26px; font-weight: bold; }
+    .logo span { color: #8ee0b0; }
+    .nav a { color: white; text-decoration: none; }
+    .hero {
+      background: #073b35;
+      color: white;
+      text-align: center;
+      padding: 45px 20px 55px;
+    }
+    .hero h1 { font-size: 34px; margin: 0 0 12px; }
+    .hero p { color: #d4e8e1; line-height: 1.6; }
+    .search {
+      max-width: 850px;
+      margin: 25px auto 0;
+      padding: 15px;
+      border-radius: 12px;
+      background: white;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7dee5;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+    button {
+      background: #087b58;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .container { padding: 28px 18px; }
+    .section-title { margin-bottom: 20px; }
+    .section-title p { color: #667785; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px #172b3a12;
+    }
+    .house {
+      height: 155px;
+      background: #dcebe5;
+      display: grid;
+      place-items: center;
+      font-size: 58px;
+    }
+    .details { padding: 16px; }
+    .price { color: #087b58; font-size: 22px; font-weight: bold; }
+    .details h3 { margin: 10px 0; }
+    .location, .features { color: #667785; font-size: 14px; line-height: 1.7; }
+    .tag {
+      display: inline-block;
+      padding: 5px 9px;
+      background: #e4f5ec;
+      color: #087b58;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+    .contact {
+      background: white;
+      text-align: center;
+      margin-top: 10px;
+      padding: 30px 18px;
+    }
+    footer {
+      background: #073b35;
+      color: white;
+      text-align: center;
+      padding: 22px;
+      font-size: 13px;
+    }
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 28px; }
+      .search { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">J<span>PROPERTY</span></div>
+      <a href="#rumah">Cari Rumah</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Cari Rumah Impian Anda</h1>
+    <p>Portal hartanah untuk seluruh Johor.<br>
+      Cari rumah yang sesuai dengan bajet anda.</p>
+
+    <form class="search" id="searchForm">
+      <select id="location" aria-label="Lokasi">
+        <option value="">Semua lokasi Johor</option>
+        <option>Johor Bahru</option>
+        <option>Kota Tinggi</option>
+        <option>Kulai</option>
+        <option>Pasir Gudang</option>
+        <option>Iskandar Puteri</option>
+        <option>Batu Pahat</option>
+        <option>Muar</option>
+        <option>Kluang</option>
+        <option>Pontian</option>
+        <option>Segamat</option>
+        <option>Mersing</option>
+        <option>Tangkak</option>
+      </select>
+      <select id="type" aria-label="Jenis transaksi">
+        <option value="">Jual atau sewa</option>
+        <option value="Dijual">Untuk dijual</option>
+        <option value="Disewa">Untuk disewa</option>
+      </select>
+      <button type="submit">Cari Rumah</button>
+    </form>
+  </section>
+
+  <main class="container" id="rumah">
+    <div class="section-title">
+      <h2>Hartanah Pilihan</h2>
+      <p id="resultCount">Contoh paparan hartanah JProperty</p>
+    </div>
+
+    <div class="cards" id="propertyList">
+      <article class="card" data-location="Kota Tinggi" data-type="Dijual">
+        <div class="house">🏡</div>
+        <div class="details">
+          <span class="tag">Untuk dijual · Contoh</span>
+          <p class="price">RM430,000</p>
+          <h3>Rumah Teres 2 Tingkat</h3>
+          <p class="location">📍 Kota Tinggi, Johor</p>
+          <p class="features">4 bilik tidur · 3 bilik air</p>
+          <button onclick="contactAgent('Rumah Teres 2 Tingkat, Kota Tinggi')">Tanya ejen</button>
+        </div>
+      </article>
+
+      <article class="card" data-location="Johor Bahru" data-type="Dijual">
+        <div class="house">🏠</div>
+        <div class="details">
+          <span class="tag">Untuk dijual · Contoh</span>
+          <p class="price">RM550,000</p>
+          <h3>Rumah Teres Moden</h3>
+          <p class="location">📍 Johor Bahru, Johor</p>
+          <p class="features">4 bilik tidur · 3 bilik air</p>
+          <button onclick="contactAgent('Rumah Teres Moden, Johor Bahru')">Tanya ejen</button>
+        </div>
+      </article>
+
+      <article class="card" data-location="Kulai" data-type="Disewa">
+        <div class="house">🏘️</div>
+        <div class="details">
+          <span class="tag">Untuk disewa · Contoh</span>
+          <p class="price">RM1,200/bulan</p>
+          <h3>Rumah Teres Setingkat</h3>
+          <p class="location">📍 Kulai, Johor</p>
+          <p class="features">3 bilik tidur · 2 bilik air</p>
+          <button onclick="contactAgent('Rumah Teres Setingkat, Kulai')">Tanya ejen</button>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <section class="contact">
+    <h2>Ingin menjual atau menyewakan rumah?</h2>
+    <p>Hubungi pasukan JProperty untuk maklumat lanjut.</p>
+    <p>Maklumat hubungan rasmi akan ditambah kemudian.</p>
+  </section>
+
+  <footer>
+    <p>© 2026 JProperty · Portal Hartanah Johor</p>
+    <p>Hartanah yang dipaparkan sekarang ialah data contoh.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('searchForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const location = document.getElementById('location').value;
+      const type = document.getElementById('type').value;
+      const cards = document.querySelectorAll('.card');
+      let count = 0;
+
+      cards.forEach(function(card) {
+        const matchLocation = !location ||
+          card.dataset.location === location;
+        const matchType = !type || card.dataset.type === type;
+        const show = matchLocation && matchType;
+        card.style.display = show ? '' : 'none';
+        if (show) count++;
+      });
+
+      document.getElementById('resultCount').textContent =
+        count + ' hartanah contoh ditemui';
+      document.getElementById('rumah').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+
+    function contactAgent(property) {
+      alert('Ini iklan contoh. Nombor WhatsApp ejen akan ditambah apabila JProperty disediakan untuk pelancaran.');
+    }
+  </script>
+</body>
+</html>
