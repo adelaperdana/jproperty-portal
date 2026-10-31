@@ -244,6 +244,101 @@
     function contactAgent(property) {
       alert('Ini iklan contoh. Nombor WhatsApp ejen akan ditambah apabila JProperty disediakan untuk pelancaran.');
     }
-  </script>
+  const translations = {
+  ms: {
+    "Cari Rumah": "Cari Rumah",
+    "Cari Rumah Impian Anda": "Cari Rumah Impian Anda",
+    "Portal hartanah untuk seluruh Johor.": "Portal hartanah untuk seluruh Johor.",
+    "Cari rumah yang sesuai dengan bajet anda.": "Cari rumah yang sesuai dengan bajet anda.",
+    "Semua lokasi Johor": "Semua lokasi Johor",
+    "Jual atau sewa": "Jual atau sewa",
+    "Cari Rumah": "Cari Rumah",
+    "Hartanah Pilihan": "Hartanah Pilihan",
+    "Contoh paparan hartanah JProperty": "Contoh paparan hartanah JProperty",
+    "Untuk dijual · Contoh": "Untuk dijual · Contoh",
+    "Untuk disewa · Contoh": "Untuk disewa · Contoh",
+    "Hartanah yang dipaparkan sekarang ialah data contoh.": "Hartanah yang dipaparkan sekarang ialah data contoh."
+  },
+  en: {
+    "Cari Rumah": "Find Homes",
+    "Cari Rumah Impian Anda": "Find Your Dream Home",
+    "Portal hartanah untuk seluruh Johor.": "Property portal for all of Johor.",
+    "Cari rumah yang sesuai dengan bajet anda.": "Find a home that fits your budget.",
+    "Semua lokasi Johor": "All locations in Johor",
+    "Jual atau sewa": "Buy or rent",
+    "Hartanah Pilihan": "Featured Properties",
+    "Contoh paparan hartanah JProperty": "Sample JProperty listings",
+    "Untuk dijual · Contoh": "For Sale · Sample",
+    "Untuk disewa · Contoh": "For Rent · Sample",
+    "Hartanah yang dipaparkan sekarang ialah data contoh.": "The properties shown are sample listings."
+  },
+  zh: {
+    "Cari Rumah": "寻找房屋",
+    "Cari Rumah Impian Anda": "寻找理想家园",
+    "Portal hartanah untuk seluruh Johor.": "覆盖柔佛州的房地产平台。",
+    "Cari rumah yang sesuai dengan bajet anda.": "寻找符合您预算的房屋。",
+    "Semua lokasi Johor": "柔佛州所有地区",
+    "Jual atau sewa": "买房或租房",
+    "Hartanah Pilihan": "精选房产",
+    "Contoh paparan hartanah JProperty": "JProperty 房产示例",
+    "Untuk dijual · Contoh": "出售 · 示例",
+    "Untuk disewa · Contoh": "出租 · 示例",
+    "Hartanah yang dipaparkan sekarang ialah data contoh.": "目前显示的房产信息仅为示例。"
+  },
+  ta: {
+    "Cari Rumah": "வீடு தேடுங்கள்",
+    "Cari Rumah Impian Anda": "உங்கள் கனவு வீட்டைத் தேடுங்கள்",
+    "Portal hartanah untuk seluruh Johor.": "ஜொகூர் முழுவதற்குமான சொத்து தளம்.",
+    "Cari rumah yang sesuai dengan bajet anda.": "உங்கள் பட்ஜெட்டுக்கு ஏற்ற வீட்டைத் தேடுங்கள்.",
+    "Semua lokasi Johor": "ஜொகூரின் அனைத்து இடங்களும்",
+    "Jual atau sewa": "வாங்க அல்லது வாடகைக்கு",
+    "Hartanah Pilihan": "தேர்ந்தெடுக்கப்பட்ட சொத்துகள்",
+    "Contoh paparan hartanah JProperty": "JProperty சொத்து மாதிரிகள்",
+    "Untuk dijual · Contoh": "விற்பனை · மாதிரி",
+    "Untuk disewa · Contoh": "வாடகைக்கு · மாதிரி",
+    "Hartanah yang dipaparkan sekarang ialah data contoh.": "இப்போது காட்டப்படும் சொத்துகள் மாதிரி தகவல்கள்."
+  }
+};
+
+function applyLanguage(language) {
+  const dictionary = translations[language] || translations.ms;
+
+  document.documentElement.lang = language;
+
+  const walker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT
+  );
+
+  let node;
+  while ((node = walker.nextNode())) {
+    const original = node.nodeValue.trim();
+    if (dictionary[original]) {
+      node.nodeValue = node.nodeValue.replace(original, dictionary[original]);
+    }
+  }
+
+  const locationOptions = {
+    ms: ["Semua lokasi Johor", "Johor Bahru", "Kota Tinggi", "Kulai", "Pasir Gudang", "Iskandar Puteri", "Batu Pahat", "Muar", "Kluang", "Pontian", "Segamat", "Mersing", "Tangkak"],
+    en: ["All locations in Johor", "Johor Bahru", "Kota Tinggi", "Kulai", "Pasir Gudang", "Iskandar Puteri", "Batu Pahat", "Muar", "Kluang", "Pontian", "Segamat", "Mersing", "Tangkak"],
+    zh: ["柔佛州所有地区", "新山", "哥打丁宜", "古来", "巴西古当", "依斯干达公主城", "峇株巴辖", "麻坡", "居銮", "笨珍", "昔加末", "丰盛港", "东甲"],
+    ta: ["ஜொகூரின் அனைத்து இடங்களும்", "ஜொகூர் பாரு", "கோத்தா திங்கி", "குலாய்", "பாசிர் கூடாங்", "இஸ்கந்தர் புத்ரி", "பத்து பஹாட்", "முவார்", "குளுவாங்", "பொந்தியான்", "செகாமாட்", "மெர்சிங்", "தங்காக்"]
+  };
+
+  const locationSelect = document.getElementById("location");
+  if (locationSelect) {
+    locationSelect.options[0].text = locationOptions[language][0];
+    for (let i = 1; i < locationSelect.options.length; i++) {
+      locationSelect.options[i].text = locationOptions[language][i] || locationSelect.options[i].value;
+    }
+  }
+}
+
+const languageSelect = document.getElementById("languageSelect");
+if (languageSelect) {
+  languageSelect.addEventListener("change", function () {
+    applyLanguage(this.value);
+  });
+}</script>
 </body>
 </html>
